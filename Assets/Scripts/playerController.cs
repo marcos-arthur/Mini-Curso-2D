@@ -38,6 +38,14 @@ public class playerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        playerAnimator.SetBool("isGrounded", isGrounded);
+
+        if(_GameController.currentState != gamestate.GAMEPLAY){
+            playerRb.velocity = new Vector2(0, playerRb.velocity.y);
+            playerAnimator.SetInteger("h", 0);
+            return;
+        }
+
         float h = Input.GetAxisRaw("Horizontal");
         
         if(isAtack && isGrounded){
@@ -68,7 +76,6 @@ public class playerController : MonoBehaviour
 
 
         playerAnimator.SetInteger("h", (int) h);
-        playerAnimator.SetBool("isGrounded", isGrounded);
         playerAnimator.SetFloat("speedY", speedY);
         playerAnimator.SetBool("isAtack", isAtack);
     }
@@ -80,10 +87,25 @@ public class playerController : MonoBehaviour
     void OnTriggerEnter2D(Collider2D col) {
         if(col.gameObject.tag == "Coletavel"){
             _GameController.playSFX(_GameController.sfxCoin, 0.5f);
+            _GameController.getCoin();
             Destroy(col.gameObject);
         }
         else if(col.gameObject.tag == "Damage"){
-            StartCoroutine("damageController");
+            _GameController.getHit();
+            if(_GameController.vida > 0){
+                StartCoroutine("damageController");
+            }            
+        }
+        else if(col.gameObject.tag == "abismo"){
+            _GameController.playSFX(_GameController.sfxDamage, 0.5f);
+            _GameController.vida = 0;
+            _GameController.heartController();
+            _GameController.painelGameOver.SetActive(true);
+            _GameController.currentState = gamestate.GAMEOVER;
+            _GameController.trocarMusica(musicaFase.GAMEOVER);
+        }
+        else if(col.gameObject.tag == "flag"){
+            _GameController.theEnd();
         }
     }
 

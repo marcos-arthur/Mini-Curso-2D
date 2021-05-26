@@ -1,16 +1,26 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public enum musicaFase{
-    FLORESTA, CAVERNA
+    FLORESTA, CAVERNA, GAMEOVER, THEEND
+}
+public enum gamestate{
+    TITULO, GAMEPLAY, END, GAMEOVER
 }
 
 public class gameController : MonoBehaviour
 {
+    [Header ("General")]
+    public gamestate currentState;
+    public GameObject painelTitulo, painelGameOver, painelEnd;
+
     private Camera cam;
     public Transform playerTransform;
 
+    [Header ("Camera")]
     public float speedCam;
     public Transform limiteCamEsq, limiteCamDir, limiteCamBaix, limiteCamSup;
 
@@ -31,16 +41,30 @@ public class gameController : MonoBehaviour
 
     public AudioClip musicFloresta, musicCaverna;
 
+    public int moedasColetadas;
+    public Text moedasTxt;
+    public Image[] coracoes;
+    public int vida;
+
     // Start is called before the first frame update
     void Start()
     {
         cam = Camera.main;
+
+        heartController();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if(currentState == gamestate.TITULO && Input.GetKeyDown(KeyCode.Space)){
+            currentState = gamestate.GAMEPLAY;
+            painelTitulo.SetActive(false);
+        }else if(currentState == gamestate.GAMEOVER && Input.GetKeyDown(KeyCode.Space)){
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }else if(currentState == gamestate.END && Input.GetKeyDown(KeyCode.Space)){
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
     }
 
     void LateUpdate() {
@@ -105,5 +129,37 @@ public class gameController : MonoBehaviour
             musicSource.volume = volume;
             yield return new WaitForEndOfFrame();
         }
+    }
+
+    public void getHit(){
+        vida -= 1;
+        heartController();
+        if(vida <= 0){
+            playerTransform.gameObject.SetActive(false);
+            painelGameOver.SetActive(true);
+            currentState = gamestate.GAMEOVER;
+            trocarMusica(musicaFase.GAMEOVER);
+        }
+    }
+
+    public void getCoin(){
+        moedasColetadas += 1;
+        moedasTxt.text = moedasColetadas.ToString();
+    }
+    public void heartController(){
+        foreach (Image h in coracoes)
+        {
+            h.enabled = false;
+        }
+        for (int v = 0; v < vida; v++)
+        {
+            coracoes[v].enabled = true;
+        }
+    }
+
+    public void theEnd(){
+        currentState = gamestate.END;
+        painelEnd.SetActive(true);
+        trocarMusica(musicaFase.THEEND);
     }
 }

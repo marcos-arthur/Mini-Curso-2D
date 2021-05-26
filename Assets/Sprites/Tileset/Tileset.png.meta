@@ -106,13 +106,13 @@ TextureImporter:
     second: Tileset_33
   - first:
       213: -8485852519046724033
-    second: Tileset_34
+    second: Ponte 1-1
   - first:
       213: 4060682636331337571
-    second: Tileset_35
+    second: Ponte 1-2
   - first:
       213: -5244482664123065748
-    second: Tileset_36
+    second: Ponte 1-3
   - first:
       213: 3355423005436571770
     second: Tileset_37
@@ -130,13 +130,13 @@ TextureImporter:
     second: Tileset_41
   - first:
       213: 5286604566695674614
-    second: Tileset_42
+    second: Ponte 2-1
   - first:
       213: -6175098468129261796
-    second: Tileset_43
+    second: Ponte 2-2
   - first:
       213: -1764967261314419617
-    second: Tileset_44
+    second: Ponte 2-3
   - first:
       213: 4097243551642442831
     second: Tileset_45
@@ -261,8 +261,8 @@ TextureImporter:
   textureSettings:
     serializedVersion: 2
     filterMode: 0
-    aniso: -1
-    mipBias: -100
+    aniso: 1
+    mipBias: 0
     wrapU: 1
     wrapV: 1
     wrapW: 1
@@ -1033,7 +1033,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Tileset_34
+      name: Ponte 1-1
       rect:
         serializedVersion: 2
         x: 80
@@ -1054,7 +1054,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Tileset_35
+      name: Ponte 1-2
       rect:
         serializedVersion: 2
         x: 96
@@ -1075,7 +1075,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Tileset_36
+      name: Ponte 1-3
       rect:
         serializedVersion: 2
         x: 112
@@ -1201,7 +1201,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Tileset_42
+      name: Ponte 2-1
       rect:
         serializedVersion: 2
         x: 80
@@ -1222,7 +1222,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Tileset_43
+      name: Ponte 2-2
       rect:
         serializedVersion: 2
         x: 96
@@ -1243,7 +1243,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Tileset_44
+      name: Ponte 2-3
       rect:
         serializedVersion: 2
         x: 112
